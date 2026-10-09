@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Want to Work — SPAS IV Solutions</title>
+<meta name="description" content="Apply to work with SPAS IV Solutions. Submit your details for verified manpower placement." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Header (identical to main page) -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <div class="logo-badge" id="header-badge">
+        <img src="logo1.png" alt="SPAS IV Solutions Logo" class="logo-img" />
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="quote.html">Request a Quote</a>
+      <a href="work.html" class="is-active">Want to Work</a>
+      <a href="contact.html" class="nav-cta">Contact Us</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero (same animated style as main page) -->
+<section class="hero" style="min-height: 55vh;">
+  <div class="floaty floaty-1"></div>
+  <div class="floaty floaty-2"></div>
+  <div class="container" style="padding-top: 140px; padding-bottom: 70px; text-align: center;">
+    <p class="hero-in status-stamp status-stamp--amber">For workers</p>
+    <h1 class="hero-in-1" style="margin-top: 16px;">Want to work with us?</h1>
+    <p class="hero-in-2 lead" style="margin-top: 18px; max-width: 560px; margin-left: auto; margin-right: auto;">
+      Fill out the short form below. We'll call you if there's a role that matches your skills — no need to apply more than once.
+    </p>
+  </div>
+</section>
+
+<!-- Google Form embed -->
+<section class="section">
+  <div class="container" style="max-width: 720px;">
+    <!--
+      SETUP REQUIRED:
+      1. Create your application form at forms.google.com
+      2. Click Send > the embed "<>" icon > copy the src URL
+      3. Replace YOUR_GOOGLE_FORM_EMBED_URL below with that link
+      4. Also replace YOUR_GOOGLE_FORM_URL on the fallback link
+    -->
+    <div class="reveal form-card" style="padding: 0; overflow: hidden;">
+      <iframe
+        src="YOUR_GOOGLE_FORM_EMBED_URL"
+        width="100%"
+        height="900"
+        frameborder="0"
+        style="display: block; border: 0;">
+        Loading form…
+      </iframe>
+    </div>
+
+    <p class="reveal" style="margin-top: 24px; color: rgba(255,255,255,0.7); text-align: center;">
+      Form not loading?
+      <a href="YOUR_GOOGLE_FORM_URL" target="_blank" style="color: var(--amber); text-decoration: underline;">
+        Open it in a new tab instead
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer container">
+  <p>SPAS IV Solutions Private Limited — hello@spasivsolutions.example</p>
+  <p class="footer-muted">© <span id="year"></span> SPAS IV Solutions. All rights reserved.</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Logo flip (same as main page)
+  (function () {
+    function runLogoFlip() {
+      const logo = document.querySelector(".site-header .logo-badge");
+      if (!logo) return;
+      logo.classList.remove("logo-flip-active");
+      void logo.offsetWidth;
+      logo.classList.add("logo-flip-active");
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", runLogoFlip, { once: true });
+    } else {
+      runLogoFlip();
+    }
+  })();
+
+  // Scroll-reveal animations
+  const revealItems = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: "0px 0px -70px 0px" });
+
+  revealItems.forEach((item, index) => {
+    item.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
+    revealObserver.observe(item);
+  });
+
+  // Mobile nav
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (navToggle && navLinks) {
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("is-open");
+      navToggle.classList.toggle("is-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+    navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+      navLinks.classList.remove("is-open");
+      navToggle.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    }));
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
