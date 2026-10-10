@@ -324,6 +324,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .header-actions{
   display:flex;
   align-items:center;
+  justify-content:flex-end;
   gap:.55rem;
   flex:none;
 }
@@ -360,10 +361,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   border:1px solid var(--line);
   background:var(--surface);
   padding:0;
-  place-items:center;
+  /* CHANGED: Replaced 'place-items: center' with proper Flexbox centering */
+  align-items:center;
+  justify-content:center;
   gap:5px;
   flex-direction:column;
+  flex-shrink:0; /* Prevents the button from being squished on small screens */
 }
+
 .nav-toggle span{
   display:block;
   width:18px;
