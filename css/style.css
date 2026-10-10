@@ -2062,187 +2062,78 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* ============================================================
    WHATSAPP WIDGET
    ============================================================ */
-.wa-widget{
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   ============================================================ */
+.wa-button{
   position:fixed;
   right:clamp(1rem, 3vw, 1.5rem);
   bottom:clamp(1rem, 3vw, 1.5rem);
   z-index:95;
-  font-family:var(--font-body);
-}
-
-/* Floating button */
-.wa-button{
-  position:relative;
-  width:58px;
-  height:58px;
-  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  padding:.75rem 1.1rem .75rem .85rem;
+  border-radius:999px;
   background:linear-gradient(180deg,#3BD671,#25D366 55%,#1EAE56);
   color:#FFFFFF;
-  display:grid;
-  place-items:center;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:.9rem;
+  text-decoration:none;
   box-shadow:
     0 12px 26px -10px rgba(37,211,102,.7),
     0 6px 14px -8px rgba(6,21,35,.5);
   transition:transform .35s var(--ease), box-shadow .35s var(--ease);
-  cursor:pointer;
+  isolation:isolate;
 }
 .wa-button:hover{
-  transform:translateY(-3px) scale(1.05);
+  transform:translateY(-3px) scale(1.04);
   box-shadow:
     0 18px 34px -12px rgba(37,211,102,.9),
     0 10px 20px -8px rgba(6,21,35,.6);
 }
 .wa-button:active{transform:translateY(-1px) scale(1.02)}
 
-.wa-button svg{
-  position:absolute;
-  transition:opacity .3s var(--ease), transform .45s var(--ease);
+.wa-icon{flex:none}
+
+.wa-label{
+  white-space:nowrap;
+  line-height:1;
 }
-.wa-icon-open{opacity:1;transform:rotate(0) scale(1)}
-.wa-icon-close{opacity:0;transform:rotate(-90deg) scale(.5)}
-.wa-widget.is-open .wa-icon-open{opacity:0;transform:rotate(90deg) scale(.5)}
-.wa-widget.is-open .wa-icon-close{opacity:1;transform:rotate(0) scale(1)}
 
 .wa-ping{
   position:absolute;
   inset:0;
-  border-radius:50%;
+  border-radius:999px;
   border:2px solid #25D366;
   opacity:0;
   animation:waPing 2.6s ease-out infinite;
   pointer-events:none;
+  z-index:-1;
 }
 @keyframes waPing{
   0%{opacity:.7;transform:scale(1)}
-  100%{opacity:0;transform:scale(1.6)}
+  100%{opacity:0;transform:scale(1.35)}
 }
 
-/* Popup card */
-.wa-popup{
-  position:absolute;
-  right:0;
-  bottom:calc(100% + 14px);
-  width:min(310px, calc(100vw - 2rem));
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:20px;
-  box-shadow:0 28px 60px -22px rgba(6,21,35,.55);
-  overflow:hidden;
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(14px) scale(.96);
-  transform-origin:bottom right;
-  transition:opacity .35s var(--ease), transform .4s var(--ease), visibility .35s;
-}
-.wa-widget.is-open .wa-popup{
-  opacity:1;
-  visibility:visible;
-  transform:translateY(0) scale(1);
+/* Mobile: round icon-only button */
+@media (max-width:620px){
+  .wa-button{
+    width:58px;
+    height:58px;
+    padding:0;
+    gap:0;
+    justify-content:center;
+    border-radius:50%;
+  }
+  .wa-label{display:none}
+  .wa-icon{width:32px;height:32px}
 }
 
-.wa-close{
-  position:absolute;
-  top:.55rem;
-  right:.55rem;
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:var(--muted);
-  background:transparent;
-  transition:background-color .25s var(--ease), color .25s var(--ease);
-  z-index:2;
+@media (prefers-reduced-motion:reduce){
+  .wa-ping{animation:none !important;opacity:.3}
 }
-.wa-close:hover{background:var(--bg-soft);color:var(--text)}
-
-.wa-popup-top{
-  display:flex;
-  align-items:center;
-  gap:.7rem;
-  padding:1rem 1rem .75rem;
-}
-.wa-avatar{
-  flex:none;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#25D366,#128C7E);
-  color:#FFFFFF;
-  box-shadow:0 6px 14px -6px rgba(37,211,102,.6);
-}
-.wa-name{
-  font-weight:700;
-  font-size:.95rem;
-  color:var(--text);
-  line-height:1.2;
-}
-.wa-status{
-  display:flex;
-  align-items:center;
-  gap:.4rem;
-  font-size:.74rem;
-  color:var(--muted);
-  margin-top:.15rem;
-}
-.wa-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#25D366;
-  box-shadow:0 0 0 3px rgba(37,211,102,.22);
-  animation:waDot 2s ease-in-out infinite;
-}
-@keyframes waDot{
-  0%,100%{transform:scale(1);opacity:1}
-  50%{transform:scale(1.25);opacity:.7}
-}
-
-.wa-popup-body{padding:0 1rem 1rem}
-
-.wa-bubble{
-  font-size:.86rem;
-  line-height:1.55;
-  color:var(--text);
-  background:var(--bg-soft);
-  padding:.75rem .85rem;
-  border-radius:14px 14px 14px 4px;
-  margin-bottom:.9rem;
-}
-
-.wa-cta{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.55rem;
-  width:100%;
-  padding:.85rem 1rem;
-  border-radius:12px;
-  background:linear-gradient(180deg,#3BD671,#25D366 60%,#1EAE56);
-  color:#FFFFFF;
-  font-size:.92rem;
-  font-weight:600;
-  text-decoration:none;
-  box-shadow:0 10px 22px -10px rgba(37,211,102,.8);
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
-}
-.wa-cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 16px 28px -12px rgba(37,211,102,1);
-}
-.wa-cta:active{transform:translateY(0)}
-.wa-cta svg{flex:none}
-
-.wa-hint{
-  font-size:.7rem;
-  color:var(--muted);
-  text-align:center;
-  margin-top:.7rem;
-  opacity:.8;
-}
-
 /* ============================================================
    RESPONSIVE — Tablet & Phone
    ============================================================ */

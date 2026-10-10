@@ -186,36 +186,8 @@
     });
   }
 
-    /* ---------------------------------------------------------
-     WHATSAPP WIDGET (used on quote.html, work.html, contact.html)
-  --------------------------------------------------------- */
-  var waWidget = document.getElementById('waWidget');
-  var waButton = document.getElementById('waButton');
-  var waClose  = document.getElementById('waClose');
 
-  if (waWidget && waButton) {
-    function toggleWa(open) {
-      waWidget.classList.toggle('is-open', open);
-      waButton.setAttribute('aria-label', open ? 'Close WhatsApp chat' : 'Chat on WhatsApp');
-    }
-
-    waButton.addEventListener('click', function () {
-      toggleWa(!waWidget.classList.contains('is-open'));
-    });
-
-    if (waClose) {
-      waClose.addEventListener('click', function () { toggleWa(false); });
-    }
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && waWidget.classList.contains('is-open')) toggleWa(false);
-    });
-
-    document.addEventListener('click', function (e) {
-      if (!waWidget.classList.contains('is-open')) return;
-      if (!waWidget.contains(e.target)) toggleWa(false);
-    });
-  }
+  
   /* ---------------------------------------------------------
      FOOTER YEAR
   --------------------------------------------------------- */
