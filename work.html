@@ -1,137 +1,327 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Want to Work — SPAS IV Solutions</title>
 <meta name="description" content="Apply to work with SPAS IV Solutions. Submit your details for verified manpower placement." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<!-- Header (identical to main page) -->
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <div class="logo-badge" id="header-badge">
-        <img src="logo1.png" alt="SPAS IV Solutions Logo" class="logo-img" />
-      </div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo" aria-label="SPAS IV Solutions — home">
+      <span class="logo-badge">
+        <span class="logo-ping" aria-hidden="true"></span>
+        <span class="logo-shine" aria-hidden="true"></span>
+        <img src="Images/logo.png" alt="SPAS IV Solutions Logo" class="logo-img"
+             onerror="this.classList.add('is-missing')" />
+        <span class="logo-mono" aria-hidden="true"></span>
+        <span class="sparks" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      </span>
+      <span class="logo-text">
+        <span class="logo-name">SPAS <em>IV</em> SOLUTIONS</span>
+        <span class="logo-sub">PRIVATE LIMITED</span>
+      </span>
     </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="quote.html">Request a Quote</a>
-      <a href="work.html" class="is-active">Want to Work</a>
-      <a href="contact.html" class="nav-cta">Contact Us</a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="quote.html" class="nav-link">Request a Quote</a>
+      <a href="work.html" class="nav-link is-active">Want to Work</a>
+      <a href="contact.html" class="btn btn--amber btn--sm nav-cta">Contact Us</a>
     </nav>
-    <button class="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+
+    <div class="header-actions">
+      <button id="theme-toggle" class="theme-toggle" type="button"
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>
+        </svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+
+      <button class="nav-toggle" id="navToggle" type="button"
+              aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
   </div>
 </header>
 
-<!-- Hero (same animated style as main page) -->
-<section class="hero" style="min-height: 55vh;">
-  <div class="floaty floaty-1"></div>
-  <div class="floaty floaty-2"></div>
-  <div class="container" style="padding-top: 140px; padding-bottom: 70px; text-align: center;">
-    <p class="hero-in status-stamp status-stamp--amber">For workers</p>
-    <h1 class="hero-in-1" style="margin-top: 16px;">Want to work with us?</h1>
-    <p class="hero-in-2 lead" style="margin-top: 18px; max-width: 560px; margin-left: auto; margin-right: auto;">
-      Fill out the short form below. We'll call you if there's a role that matches your skills — no need to apply more than once.
-    </p>
-  </div>
-</section>
+<main id="main">
 
-<!-- Google Form embed -->
-<section class="section">
-  <div class="container" style="max-width: 720px;">
-    <!--
-      SETUP REQUIRED:
-      1. Create your application form at forms.google.com
-      2. Click Send > the embed "<>" icon > copy the src URL
-      3. Replace YOUR_GOOGLE_FORM_EMBED_URL below with that link
-      4. Also replace YOUR_GOOGLE_FORM_URL on the fallback link
-    -->
-    <div class="reveal form-card" style="padding: 0; overflow: hidden;">
-      <iframe
-        src="YOUR_GOOGLE_FORM_EMBED_URL"
-        width="100%"
-        height="900"
-        frameborder="0"
-        style="display: block; border: 0;">
-        Loading form…
-      </iframe>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="floaty floaty-1" aria-hidden="true"></div>
+    <div class="floaty floaty-2" aria-hidden="true"></div>
+    <div class="floaty floaty-3" aria-hidden="true"></div>
+
+    <div class="container hero-layout hero-layout--single">
+
+      <div class="hero-inner">
+        <p class="status-stamp status-stamp--amber hero-anim" style="--d:0ms">
+          For workers
+        </p>
+
+        <h1 class="hero-title hero-anim" style="--d:90ms">
+          Find reliable work with <em>on-time pay.</em>
+        </h1>
+
+        <p class="lead hero-anim" style="--d:180ms">
+          We place verified workers with businesses across construction, warehousing,
+          driving, and technical trades. Apply once — we'll match you to available roles.
+        </p>
+
+        <div class="cta-row hero-anim" style="--d:270ms">
+          <a href="#apply" class="btn btn--amber">
+            Apply now <span class="btn-arrow">→</span>
+          </a>
+          <a href="contact.html" class="btn btn--outline-light">
+            Contact us <span class="btn-arrow">→</span>
+          </a>
+        </div>
+
+        <ul class="hero-chips hero-anim" style="--d:360ms">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5"/>
+            </svg>
+            Paid on time, every cycle
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5"/>
+            </svg>
+            Free to apply
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5"/>
+            </svg>
+            Verified employers only
+          </li>
+        </ul>
+      </div>
+
     </div>
+  </section>
 
-    <p class="reveal" style="margin-top: 24px; color: rgba(255,255,255,0.7); text-align: center;">
-      Form not loading?
-      <a href="YOUR_GOOGLE_FORM_URL" target="_blank" style="color: var(--amber); text-decoration: underline;">
-        Open it in a new tab instead
-      </a>
-    </p>
-  </div>
-</section>
+  <!-- ===================== GOOGLE FORM EMBED ===================== -->
+  <section class="section" id="apply">
+    <div class="container">
 
-<!-- Footer -->
+      <div class="form-head reveal" style="max-width:720px;margin-inline:auto;margin-bottom:2rem;">
+        <p class="status-stamp status-stamp--steel">Work application</p>
+        <h2 class="section-title">Apply to work with us</h2>
+        <p class="section-intro">
+          Fill out the form below. We'll call you if there's a role that matches your
+          skills — no need to apply more than once.
+        </p>
+      </div>
+
+      <div class="form-wrap google-form-card reveal"></div>
+        <div class="google-form-clip">
+          <iframe
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfWPR93D3CxKN-8w_WTfGBZeGRYqyQoUhKUCQyqS0_1aLgzVg/viewform?embedded=true"
+      width="100%"
+      height="1600"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0"
+      title="Work application form">
+      Loading form…
+          </iframe>
+        </div>
+      </div>
+
+      <p class="reveal" style="margin-top: 32px; color: var(--muted); text-align: center; font-size:.92rem;">
+        Form not loading?
+        <a href="https://forms.gle/FMT86F6FUk4G7Tbi6" target="_blank" rel="noopener"
+           style="color: var(--amber-600); text-decoration: underline; font-weight:600;">
+          Open it in a new tab instead
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== WHY WORK WITH US ===================== -->
+  <section class="section section--soft">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="status-stamp status-stamp--steel">Why apply here</p>
+        <h2 class="section-title">What you get with SPAS IV</h2>
+        <p class="section-intro">
+          We treat every worker with respect - proper verification, clear expectations,
+          and pay that arrives on time.
+        </p>
+      </div>
+
+      <div class="grid grid--3">
+
+        <article class="feature-card reveal">
+          <span class="feature-number" aria-hidden="true">01</span>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 3h8l4 4v14H7z"/>
+              <path d="M9 11h6M9 15h6"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">On-time pay</h3>
+          <p class="feature-text">
+            Transparent payroll with a clear pay cycle. No delays, no excuses -
+            every worker gets paid on the agreed date.
+          </p>
+        </article>
+
+        <article class="feature-card reveal">
+          <span class="feature-number" aria-hidden="true">02</span>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Verified employers</h3>
+          <p class="feature-text">
+            We only place workers with vetted businesses. You know exactly who you're
+            working for before day one.
+          </p>
+        </article>
+
+        <article class="feature-card reveal">
+          <span class="feature-number" aria-hidden="true">03</span>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 3"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Fast matching</h3>
+          <p class="feature-text">
+            Most applicants are matched to a role within a week. Urgent roles can be
+            filled within 48 hours.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS ===================== -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="stats">
+        <div class="stat reveal">
+          <p class="num" data-target="10000" data-suffix="+">10000+</p>
+          <p class="label">Workers placed</p>
+        </div>
+        <div class="stat reveal">
+          <p class="num" data-target="6" data-suffix="+">6+</p>
+          <p class="label">Cities hiring</p>
+        </div>
+        <div class="stat reveal">
+          <p class="num" data-target="48" data-suffix="h">48h</p>
+          <p class="label">Average placement</p>
+        </div>
+        <div class="stat reveal">
+          <p class="num" data-target="100" data-suffix="%">100%</p>
+          <p class="label">On-time pay record</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section class="section">
+    <div class="container">
+      <p class="status-stamp status-stamp--steel reveal">Process</p>
+      <h2 class="section-title reveal">How it works</h2>
+
+      <div class="grid grid--3 mt-lg">
+
+        <div class="process-step reveal">
+          <p class="step-number">01</p>
+          <p class="step-text">Fill the application form above - takes about 2 minutes.</p>
+        </div>
+
+        <div class="process-step reveal">
+          <p class="step-number">02</p>
+          <p class="step-text">We verify your ID and details, then match you to suitable roles.</p>
+        </div>
+
+        <div class="process-step reveal">
+          <p class="step-number">03</p>
+          <p class="step-text">Once matched, we help you start work - usually within a week.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TESTIMONIAL ===================== -->
+  <section class="testimonial">
+    <div class="container testimonial-inner">
+      <p class="testimonial-quote reveal">
+        "I applied on a Monday and started work by Thursday. The pay is always on time
+        and the site manager treats us fairly. That's all I needed."
+      </p>
+      <p class="testimonial-author reveal">
+        Site Foreman - placed with a Himachal construction firm
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-panel reveal">
+        <h2>Questions before you apply?</h2>
+        <p class="final-cta-text">
+          Reach out to us - we usually reply within minutes.
+        </p>
+        <div class="final-cta-actions">
+          <a href="contact.html" class="btn btn--navy">
+            Contact us <span class="btn-arrow">→</span>
+          </a>
+          <a href="quote.html" class="btn btn--amber">
+            For businesses <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
 <footer class="site-footer container">
   <p>SPAS IV Solutions Private Limited — hello@spasivsolutions.example</p>
   <p class="footer-muted">© <span id="year"></span> SPAS IV Solutions. All rights reserved.</p>
 </footer>
 
 <script src="js/main.js"></script>
-<script>
-  // Logo flip (same as main page)
-  (function () {
-    function runLogoFlip() {
-      const logo = document.querySelector(".site-header .logo-badge");
-      if (!logo) return;
-      logo.classList.remove("logo-flip-active");
-      void logo.offsetWidth;
-      logo.classList.add("logo-flip-active");
-    }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", runLogoFlip, { once: true });
-    } else {
-      runLogoFlip();
-    }
-  })();
-
-  // Scroll-reveal animations
-  const revealItems = document.querySelectorAll(".reveal");
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: 0.14, rootMargin: "0px 0px -70px 0px" });
-
-  revealItems.forEach((item, index) => {
-    item.style.setProperty("--reveal-delay", `${Math.min(index * 70, 280)}ms`);
-    revealObserver.observe(item);
-  });
-
-  // Mobile nav
-  const navToggle = document.querySelector(".nav-toggle");
-  const navLinks = document.querySelector(".nav-links");
-  if (navToggle && navLinks) {
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("is-open");
-      navToggle.classList.toggle("is-open", open);
-      navToggle.setAttribute("aria-expanded", String(open));
-    });
-    navLinks.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-      navLinks.classList.remove("is-open");
-      navToggle.classList.remove("is-open");
-      navToggle.setAttribute("aria-expanded", "false");
-    }));
-  }
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 </body>
 </html>
