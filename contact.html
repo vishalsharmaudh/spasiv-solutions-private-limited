@@ -141,45 +141,27 @@
             <div class="grid grid--2">
               <div class="field">
                 <label for="c-name">Full name <span class="req-mark">*</span></label>
-                <input id="c-name" name="from_name" type="text" required
-                       data-validate="name"
-                       autocomplete="name"
-                       placeholder="Your full name"
-                       maxlength="60" />
+                <input id="c-name" name="from_name" type="text" required data-validate="name" autocomplete="name" placeholder="Your full name" maxlength="60" />
               </div>
               <div class="field">
                 <label for="c-phone">Phone <span class="opt-mark">(optional)</span></label>
-                <input id="c-phone" name="phone" type="tel"
-                       data-validate="phone-optional"
-                       autocomplete="tel"
-                       placeholder="+91 98765 43210"
-                       maxlength="20" />
+                <input id="c-phone" name="phone" type="tel" data-validate="phone-optional" autocomplete="tel" placeholder="+91 98765 43210" maxlength="20" />
               </div>
             </div>
 
             <div class="field">
               <label for="c-email">Email <span class="req-mark">*</span></label>
-              <input id="c-email" name="from_email" type="email" required
-                     data-validate="email"
-                     autocomplete="email"
-                     placeholder="you@example.com"
-                     maxlength="120" />
+              <input id="c-email" name="from_email" type="email" required data-validate="email" autocomplete="email" placeholder="you@example.com" maxlength="120" />
             </div>
 
             <div class="field">
               <label for="c-subject">Subject <span class="opt-mark">(optional)</span></label>
-              <input id="c-subject" name="subject" type="text"
-                     data-validate="subject"
-                     placeholder="e.g. Partnership enquiry"
-                     maxlength="100" />
+              <input id="c-subject" name="subject" type="text" data-validate="subject" placeholder="e.g. Partnership enquiry" maxlength="100" />
             </div>
 
             <div class="field">
               <label for="c-message">Message <span class="req-mark">*</span></label>
-              <textarea id="c-message" name="message" rows="5" required
-                        data-validate="message"
-                        placeholder="Tell us what you need…"
-                        maxlength="1000"></textarea>
+              <textarea id="c-message" name="message" rows="5" required data-validate="message" placeholder="Tell us what you need…" maxlength="1000"></textarea>
               <p class="field-hint"><span id="msg-counter">0</span> / 1000 characters</p>
             </div>
 
@@ -188,9 +170,7 @@
                 <span class="btn-label">Send message</span>
                 <span class="btn-arrow">→</span>
               </button>
-              <p id="contact-form-status" class="form-status" role="status" aria-live="polite"></p>
             </div>
-
           </form>
         </div>
 
@@ -266,7 +246,7 @@
             Looking to hire staff? Use the
             <a href="quote.html">Request a Quote</a> form for faster response.
             Looking for work? Use the
-            <a href="work.html">Want to Work</a> form.
+            <a href="work.html">Career</a> form.
           </p>
         </aside>
 
@@ -302,34 +282,65 @@
   <p class="footer-muted">© <span id="year"></span> SPAS IV Solutions. All rights reserved.</p>
 </footer>
 
+<!-- ===================== SUCCESS / ERROR MODAL ===================== -->
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal-card">
+    <div class="modal-icon" id="modalIcon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    </div>
+    <h3 class="modal-title" id="modalTitle">Message Prepared!</h3>
+    <p class="modal-text" id="modalText">We are opening your email app. Please click "Send" there to deliver your message to us.</p>
+    <button type="button" class="btn btn--navy modal-btn" id="closeModalBtn">Got it</button>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
 <script>
-  /* =========================================================
-     CONTACT FORM — Full validation (no EmailJS)
-     ---------------------------------------------------------
-     On successful validation, opens the user's email client
-     with all form data pre-filled via mailto:.
-     Replace EMAIL_TO with your real inbox.
-  ========================================================= */
   (function () {
-    var EMAIL_TO = 'admin@spasiv.com';
+    /* =========================================================
+       TARGET EMAIL ADDRESS
+       Change this to wherever you want the contact messages to go
+    ========================================================= */
+    var TARGET_EMAIL = 'admin@spasiv.com';
 
     var form   = document.getElementById('contact-form');
-    var status = document.getElementById('contact-form-status');
     var button = form ? form.querySelector('button[type="submit"]') : null;
     if (!form) return;
 
-    /* ------ Error helpers ------ */
+    /* ------ Modal Helpers ------ */
+    var modal = document.getElementById('feedbackModal');
+    var modalIcon = document.getElementById('modalIcon');
+    var modalTitle = document.getElementById('modalTitle');
+    var modalText = document.getElementById('modalText');
+    var closeModalBtn = document.getElementById('closeModalBtn');
+
+    function showModal(isSuccess, title, message) {
+      if (isSuccess) {
+        modalIcon.classList.remove('is-error');
+        modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      } else {
+        modalIcon.classList.add('is-error');
+        modalIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>';
+      }
+      modalTitle.textContent = title;
+      modalText.textContent = message;
+      modal.classList.add('is-open');
+    }
+
+    if (closeModalBtn) closeModalBtn.addEventListener('click', () => modal.classList.remove('is-open'));
+    if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('is-open'); });
+
+    /* ------ Validation Helpers ------ */
     function showError(field, message) {
       clearError(field);
       field.classList.add('has-error');
       field.classList.remove('is-valid');
       field.setAttribute('aria-invalid', 'true');
-
       var err = document.createElement('p');
       err.className = 'field-error';
-      err.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg>' +
-                      '<span>' + message + '</span>';
+      err.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg><span>' + message + '</span>';
       field.parentElement.appendChild(err);
     }
 
@@ -353,39 +364,30 @@
       form.querySelectorAll('.field-error').forEach(function (el) { el.remove(); });
     }
 
-    /* ------ Validation rules ------ */
     var rules = {
       name: function (value) {
         if (!value) return 'Full name is required.';
         if (value.length < 2) return 'Please enter at least 2 characters.';
-        if (!/^[A-Za-z\s.'\-]+$/.test(value)) {
-          return 'Name can only contain letters, spaces, and . \' -.';
-        }
+        if (!/^[A-Za-z\s.'\-]+$/.test(value)) return 'Name can only contain letters, spaces, and . \' -.';
         return true;
       },
-
       'phone-optional': function (value) {
-        if (!value) return true; // optional
+        if (!value) return true;
         var digits = value.replace(/\D/g, '');
         if (digits.length < 7) return 'Phone number is too short (min 7 digits).';
         if (digits.length > 15) return 'Phone number is too long (max 15 digits).';
         return true;
       },
-
       email: function (value) {
         if (!value) return 'Email is required.';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
-          return 'Please enter a valid email address.';
-        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return 'Please enter a valid email address.';
         return true;
       },
-
       subject: function (value) {
-        if (!value) return true; // optional
+        if (!value) return true;
         if (value.length > 100) return 'Please keep it under 100 characters.';
         return true;
       },
-
       message: function (value) {
         if (!value) return 'Message is required.';
         if (value.length < 10) return 'Please write at least 10 characters.';
@@ -394,59 +396,47 @@
       }
     };
 
-    /* ------ Validate a single field ------ */
     function validateField(field) {
       var ruleName = field.getAttribute('data-validate');
       if (!ruleName || !rules[ruleName]) return true;
-
       var value = (field.value || '').trim();
       var result = rules[ruleName](value);
-
       if (result === true) {
-        if (value) markValid(field);
-        else clearError(field);
+        if (value) markValid(field); else clearError(field);
         return true;
       }
-
       showError(field, result);
       return false;
     }
 
-    /* ------ Validate all ------ */
     function validateForm() {
       var fields = form.querySelectorAll('[data-validate]');
       var valid = true;
       var firstInvalid = null;
-
       fields.forEach(function (field) {
         if (!validateField(field)) {
           valid = false;
           if (!firstInvalid) firstInvalid = field;
         }
       });
-
       if (firstInvalid) {
         firstInvalid.focus();
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setStatus('Please fix the highlighted fields above.', 'error');
       }
       return valid;
     }
 
-    /* ------ Real-time validation ------ */
     form.querySelectorAll('input, textarea').forEach(function (field) {
       field.addEventListener('input', function () {
         if (field.classList.contains('has-error')) clearError(field);
       });
       field.addEventListener('blur', function () {
-        if (field.value.trim() || field.hasAttribute('required')) {
-          validateField(field);
-        }
+        if (field.value.trim() || field.hasAttribute('required')) validateField(field);
       });
     });
 
-    /* ------ Character counter ------ */
-    var msgField   = document.getElementById('c-message');
+    /* ------ Character Counter ------ */
+    var msgField = document.getElementById('c-message');
     var msgCounter = document.getElementById('msg-counter');
     if (msgField && msgCounter) {
       msgField.addEventListener('input', function () {
@@ -459,66 +449,55 @@
       });
     }
 
-    /* ------ Status + loading ------ */
-    function setStatus(message, type) {
-      if (!status) return;
-      status.textContent = message;
-      status.className = 'form-status' + (type ? ' is-' + type : '');
-    }
     function setLoading(isLoading) {
       if (!button) return;
       button.disabled = isLoading;
       var label = button.querySelector('.btn-label');
-      if (label) label.textContent = isLoading ? 'Opening…' : (button.dataset.label || 'Send message');
+      if (label) label.textContent = isLoading ? 'Preparing…' : (button.dataset.label || 'Send message');
     }
 
-    /* ------ Build email body ------ */
-    function buildEmailBody() {
-      var data = new FormData(form);
-      var labels = {
-        from_name:  'Name',
-        from_email: 'Email',
-        phone:      'Phone',
-        subject:    'Subject',
-        message:    'Message'
-      };
-      var lines = ['New contact message — SPAS IV Solutions', ''];
-      Object.keys(labels).forEach(function (key) {
-        var val = (data.get(key) || '').toString().trim();
-        if (val) lines.push(labels[key] + ': ' + val);
-      });
-      lines.push('', '—', 'Sent from spasiv.in/contact.html');
-      return lines.join('\n');
-    }
-
-    /* ------ Submit ------ */
+    /* ------ Submit via Mailto (No API needed) ------ */
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      setStatus('', '');
 
       if (!validateForm()) return;
 
       setLoading(true);
 
       var data = new FormData(form);
-      var subject = (data.get('subject') || '').toString().trim() ||
-                    ('Contact message — ' + (data.get('from_name') || 'New enquiry'));
-      var body    = buildEmailBody();
+      var subject = (data.get('subject') || '').toString().trim() || ('Contact Message — ' + (data.get('from_name') || 'New enquiry'));
+      
+      // Build the email body
+      var bodyLines = [
+        'New contact message from spasiv.in',
+        '-----------------------------------',
+        'Name: ' + (data.get('from_name') || ''),
+        'Email: ' + (data.get('from_email') || ''),
+        'Phone: ' + (data.get('phone') || 'N/A'),
+        '',
+        'Message:',
+        (data.get('message') || ''),
+        '-----------------------------------'
+      ];
 
-      var mailto = 'mailto:' + EMAIL_TO +
+      // Construct mailto link
+      var mailto = 'mailto:' + TARGET_EMAIL +
                    '?subject=' + encodeURIComponent(subject) +
-                   '&body='    + encodeURIComponent(body);
+                   '&body='    + encodeURIComponent(bodyLines.join('\n'));
 
+      // Trigger the mailto link
       setTimeout(function () {
         window.location.href = mailto;
         setLoading(false);
-        setStatus('Opening your email client — please press Send to deliver your message.', 'success');
-        setTimeout(function () {
-          form.reset();
-          clearAllStates();
-          if (msgCounter) msgCounter.textContent = '0';
-        }, 400);
-      }, 300);
+        
+        // Show the beautiful success modal
+        showModal(true, 'Email App Opening...', 'Your message is ready. Please click "Send" in your email app to deliver it to us.');
+        
+        // Reset the form
+        form.reset();
+        clearAllStates();
+        if (msgCounter) msgCounter.textContent = '0';
+      }, 400);
     });
   })();
 </script>
